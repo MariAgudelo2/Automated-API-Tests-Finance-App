@@ -12,7 +12,7 @@ Feature: User registration
     And the response includes a valid token
     And the response email is "new@example.com"
 
-  Scenario: Registration with already registered email
+  Scenario: Register with existing email
     Given the email "existing@example.com" is already registered
     When I try to register with first name "Camila", last name "Castro", email "existing@example.com" and password "Password123!"
     Then the response status code is 409

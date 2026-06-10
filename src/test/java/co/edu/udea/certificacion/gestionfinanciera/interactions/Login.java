@@ -1,28 +1,27 @@
-package co.edu.udea.certificacion.gestionfinanciera.tasks.auth;
+package co.edu.udea.certificacion.gestionfinanciera.interactions;
+import net.serenitybdd.screenplay.Interaction;
+import net.serenitybdd.screenplay.Tasks;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import co.edu.udea.certificacion.gestionfinanciera.abilities.CallTheFinanceApi;
 import co.edu.udea.certificacion.gestionfinanciera.models.TokenMemory;
 import co.edu.udea.certificacion.gestionfinanciera.models.User;
 import net.serenitybdd.rest.SerenityRest;
 import net.serenitybdd.screenplay.Actor;
-import net.serenitybdd.screenplay.Task;
-import net.serenitybdd.screenplay.Tasks;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import static co.edu.udea.certificacion.gestionfinanciera.config.ApiConfig.AUTH_LOGIN;
 
-public class LoginUser implements Task {
-
+public class Login implements Interaction {
     private final User user;
 
-    public LoginUser(User user) {
+    public Login(User user) {
         this.user = user;
     }
 
-    public static LoginUser withCredentials(User user) {
-        return Tasks.instrumented(LoginUser.class, user);
+     public static Login withCredentials(User user) {
+        return Tasks.instrumented(Login.class, user);
     }
 
     @Override
@@ -41,4 +40,5 @@ public class LoginUser implements Task {
             actor.remember(TokenMemory.JWT_TOKEN, token);
         }
     }
+
 }

@@ -13,6 +13,10 @@ public class User {
         this.password = password;
     }
 
+    public User(String email, String password) {
+        this("", "", email, password);
+    }
+
     public String getFirstName() { return firstName; }
     public String getLastname() { return lastname; }
     public String getEmail() { return email; }
