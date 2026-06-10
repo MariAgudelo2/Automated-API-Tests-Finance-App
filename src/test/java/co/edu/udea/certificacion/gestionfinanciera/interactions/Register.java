@@ -12,9 +12,6 @@ import co.edu.udea.certificacion.gestionfinanciera.models.User;
 import net.serenitybdd.rest.SerenityRest;
 import net.serenitybdd.screenplay.Actor;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import static co.edu.udea.certificacion.gestionfinanciera.config.ApiConfig.AUTH_REGISTER;
 
 public class Register implements Interaction {

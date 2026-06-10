@@ -1,8 +1,5 @@
 package co.edu.udea.certificacion.gestionfinanciera.config;
 
-import net.serenitybdd.model.environment.EnvironmentSpecificConfiguration;
-import net.thucydides.model.environment.SystemEnvironmentVariables;
-import net.thucydides.model.util.EnvironmentVariables;
 
 public final class ApiConfig {
 
