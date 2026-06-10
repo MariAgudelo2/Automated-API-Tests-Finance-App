@@ -32,4 +32,4 @@ Feature: User registration
       | Camila | Castro   | cam@test.co  |              | contrasena    | La contraseña es obligatoria                       |
       | Camila | Castro   | cam@test.co  | weakpassword | contrasena    | Debe tener mayúscula, número y carácter especial   |  
       | Camila | Castro   | cam@test.co  |              | contrasena    | La contraseña es obligatoria                       |
-      | Camila | Castro   | cam@test.co  |    Weak1!    | contrasena    | Mínimo 8 caracteres                            |   
+      | Camila | Castro   | cam@test.co  |    Weak1!    | contrasena    | Mínimo 8 caracteres                                |   

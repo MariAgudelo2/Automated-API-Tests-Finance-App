@@ -10,7 +10,6 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 
-import net.serenitybdd.rest.SerenityRest;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.actors.OnStage;
 
@@ -25,11 +24,6 @@ public class CommonStepsDefinition {
         user.attemptsTo(
             LoginUser.withCredentials(loggedUser)
         );
-        System.out.println("LOGIN STATUS = "
-        + SerenityRest.lastResponse().statusCode());
-
-        System.out.println("LOGIN BODY = "
-        + SerenityRest.lastResponse().asString());
     }
 
     @Then("the response status code is {int}")

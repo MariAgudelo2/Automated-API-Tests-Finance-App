@@ -9,9 +9,9 @@ Background:
 Given I am authenticated
 
 Scenario: Successful category creation
-When I create a category with name "Transporte"
+When I create a category with name "Suscripciones"
 Then the response status code is 200
-And the category name is "Transporte"
+And the category name is "Suscripciones"
 
 Scenario: Category creation without name
 Given I am authenticated

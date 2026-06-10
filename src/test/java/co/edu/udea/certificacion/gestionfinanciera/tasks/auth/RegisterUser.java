@@ -1,6 +1,5 @@
 package co.edu.udea.certificacion.gestionfinanciera.tasks.auth;
 
-
 import co.edu.udea.certificacion.gestionfinanciera.interactions.Register;
 import co.edu.udea.certificacion.gestionfinanciera.models.User;
 import net.serenitybdd.screenplay.Actor;
