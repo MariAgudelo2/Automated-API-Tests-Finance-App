@@ -1,28 +1,66 @@
 plugins {
-	id 'java'
-	id 'org.springframework.boot' version '4.0.6'
-	id 'io.spring.dependency-management' version '1.1.7'
+    id 'java'
+    id 'net.serenity-bdd.serenity-gradle-plugin' version '4.2.34'
 }
 
 group = 'co.edu.udea.certificacion'
-version = '0.0.1-SNAPSHOT'
+version = '1.0.0'
 
 java {
-	toolchain {
-		languageVersion = JavaLanguageVersion.of(17)
-	}
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
 }
 
 repositories {
-	mavenCentral()
+    mavenCentral()
+}
+
+ext {
+    serenityVersion = '4.2.34'
+    cucumberVersion = '7.20.1'
+    junitPlatformVersion = '1.11.3'
+    datafakerVersion = '2.4.2'
+    jacksonVersion = '2.18.2'
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    // Serenity BDD core + Screenplay for REST APIs (no UI/WebDriver dependencies)
+    testImplementation "net.serenity-bdd:serenity-core:${serenityVersion}"
+    testImplementation "net.serenity-bdd:serenity-screenplay:${serenityVersion}"
+    testImplementation "net.serenity-bdd:serenity-screenplay-rest:${serenityVersion}"
+    testImplementation "net.serenity-bdd:serenity-ensure:${serenityVersion}"
+    testImplementation "net.serenity-bdd:serenity-cucumber:${serenityVersion}"
+
+    // Cucumber 7 running on the JUnit 5 Platform
+    testImplementation "io.cucumber:cucumber-java:${cucumberVersion}"
+    testImplementation "io.cucumber:cucumber-junit-platform-engine:${cucumberVersion}"
+    testImplementation "org.junit.platform:junit-platform-suite:${junitPlatformVersion}"
+    testRuntimeOnly "org.junit.platform:junit-platform-launcher:${junitPlatformVersion}"
+
+    // Dynamic test data generation + JSON serialization
+    testImplementation "net.datafaker:datafaker:${datafakerVersion}"
+    testImplementation "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
+
+    // Assertions
+    testImplementation 'org.assertj:assertj-core:3.27.0'
 }
 
-tasks.named('test') {
-	useJUnitPlatform()
+test {
+    useJUnitPlatform()
+    outputs.upToDateWhen { false }
+    testLogging {
+        showStandardStreams = true
+        events 'passed', 'skipped', 'failed'
+    }
+    
+    // Explicitly filter out discovery-breaking properties
+    systemProperties System.getProperties().findAll {
+        String key = it.key.toString()
+        (key.startsWith('restapi') || key.startsWith('environment') || key.startsWith('cucumber')) && 
+        !key.equals('cucumber.features') && !key.equals('cucumber.options')
+    }
 }
+
+// Make the Serenity aggregated report depend on the test run
+test.finalizedBy('aggregate')
